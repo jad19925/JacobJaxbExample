@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<calcConfig>
+    <backgroundColor>blue</backgroundColor>
+    <buttonColor>black</buttonColor>
+    <textColor>red</textColor>
+</calcConfig>
