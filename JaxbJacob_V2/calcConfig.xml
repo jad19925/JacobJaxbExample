@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<windowConfig>
+    <backgroundImage>res/Backdrops/Autumn.png</backgroundImage>
+    <buttonImage>res/Buttons/Button.png</buttonImage>
+    <fontName>Comic Sans MS</fontName>
+    <fontSize>20</fontSize>
+</windowConfig>
