@@ -47,6 +47,8 @@ public class BasicDesktop implements ActionListener {
 	private JPanel testpanel;
 	private InternalCalculator calculator;
 	
+	private JLabel speechTest;
+	
 	private ArrayList<JMenuItem> backgroundList;
 	private ArrayList<JMenuItem> buttonImageList;
 	private ArrayList<JMenuItem> fontList;
@@ -64,6 +66,10 @@ public class BasicDesktop implements ActionListener {
 				try {
 					BasicDesktop window = new BasicDesktop();
 					window.frame.setVisible(true);
+
+					Graphics gl = window.speechTest.getGraphics();
+					SpeechBubble.drawBubble(gl, 100, 100, 50, 50);
+					window.frame.repaint();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -258,6 +264,14 @@ public class BasicDesktop implements ActionListener {
 		calculator = new InternalCalculator(testpanel, config.getFontName(), config.getFontSize());
 		layeredPane.add(testpanel, new Integer(1),0);
 		testpanel.setVisible(false);
+		
+		speechTest = new JLabel("Hello");
+		speechTest.setFont(new Font(config.getFontName(), Font.PLAIN, config.getFontSize()));
+		speechTest.setBounds(400, 200, 50, 50);
+		layeredPane.setLayer(speechTest, 3);
+		layeredPane.add(speechTest);
+//		Graphics gl = speechTest.getGraphics();
+//		SpeechBubble.drawBubble(gl, 100, 100, 50, 50);
 	}
 	
 	public void setBackgroundImage(String imagePath)
