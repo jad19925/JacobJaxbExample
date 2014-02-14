@@ -47,7 +47,7 @@ public class BasicDesktop implements ActionListener {
 	private JPanel testpanel;
 	private InternalCalculator calculator;
 	
-	private JLabel speechTest;
+	private ThoughtBubble speechTest;
 	
 	private ArrayList<JMenuItem> backgroundList;
 	private ArrayList<JMenuItem> buttonImageList;
@@ -67,9 +67,11 @@ public class BasicDesktop implements ActionListener {
 					BasicDesktop window = new BasicDesktop();
 					window.frame.setVisible(true);
 
-					Graphics gl = window.speechTest.getGraphics();
-					SpeechBubble.drawBubble(gl, 100, 100, 50, 50);
-					window.frame.repaint();
+//					Graphics gl = window.speechTest.getGraphics();
+//					//SpeechBubble.drawBubble(gl, 50, 200, 50, 50);
+//					gl.setColor(Color.BLACK);
+//					gl.fillRect(400, 200, 50, 50);
+//					window.speechTest.repaint();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -265,13 +267,13 @@ public class BasicDesktop implements ActionListener {
 		layeredPane.add(testpanel, new Integer(1),0);
 		testpanel.setVisible(false);
 		
-		speechTest = new JLabel("Hello");
-		speechTest.setFont(new Font(config.getFontName(), Font.PLAIN, config.getFontSize()));
-		speechTest.setBounds(400, 200, 50, 50);
+		speechTest = new ThoughtBubble("What a great game, I learned so much!");
+		//speechTest.setFont(new Font(config.getFontName(), Font.PLAIN, config.getFontSize()));
+		speechTest.setBounds(400, 200, 200, 100);
+		speechTest.setPointDirection(ThoughtBubble.PointDirection.LEFT_DOWN);
+		//speechTest.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
 		layeredPane.setLayer(speechTest, 3);
 		layeredPane.add(speechTest);
-//		Graphics gl = speechTest.getGraphics();
-//		SpeechBubble.drawBubble(gl, 100, 100, 50, 50);
 	}
 	
 	public void setBackgroundImage(String imagePath)

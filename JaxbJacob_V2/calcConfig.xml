@@ -3,5 +3,5 @@
     <backgroundImage>res/Backdrops/Autumn.png</backgroundImage>
     <buttonImage>res/Buttons/Button.png</buttonImage>
     <fontName>Comic Sans MS</fontName>
-    <fontSize>20</fontSize>
+    <fontSize>18</fontSize>
 </windowConfig>
