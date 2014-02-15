@@ -142,21 +142,31 @@ public class ThoughtBubble extends JLabel {
 
         // Draw the base shape -- the rectangle the image will fit into as well as its outline
         g.setColor(Color.WHITE);
-        g.fillRoundRect(x+5, y - height - ARROW_HEIGHT+5, width-10, height-5, height-5/2, height-5/2);
+        g.fillRoundRect(x+5, y - height - ARROW_HEIGHT+5, width-10, height-10, height-10, height-10);
         g.setColor(Color.BLACK);
-        g.drawRoundRect(x+5, y - height - ARROW_HEIGHT+5, width-10, height-5, height-5/2, height-5/2);
+        g.drawRoundRect(x+5, y - height - ARROW_HEIGHT+5, width-10, height-10, height-10, height-10);
         //create an array of points along the edge of the rounded rectangle and draw arcs between the points somehow?
+        g.drawRoundRect(x, y - height - ARROW_HEIGHT, width, height, height, height);
+        /*
+         * 
+         */
+        g.drawArc(x+height/2-28, 8, 15, 15, 30, 210);
+        g.drawArc(x+height/2-15, 0, 15, 15, 0, 210);
+        g.drawArc(x+height/2, 0, 15, 15, 0, 180);
+        g.drawArc(x+height/2+15, 0, 15, 15, 0, 180);
+        g.drawArc(x+height/2+30, 0, 15, 15, 0, 180);
         
-        
-        // Next is to draw the pointy part that indicates who is speaking
+        //draw little circles indicating who is thinking
         g.setColor(Color.WHITE);
-        g.fillPolygon(xcoords, ycoords, numTriangleCoords);
-        g.drawLine(xcoords[1] + 1, ycoords[1], xcoords[2] - 1, ycoords[2]);
+        g.fillArc(x, y-6, 5, 5, 0, 360);
+        g.fillArc(x+5, y-14, 8, 8, 0, 360);
+        g.fillArc(x+13, y-24, 10, 10, 0, 360);
         
-        // This is the outline to the pointy part
+        //outline the circles
         g.setColor(Color.BLACK);
-        g.drawLine(x, y, xcoords[1], ycoords[1]);
-        g.drawLine(x, y, xcoords[2], ycoords[2]);
+        g.drawArc(x, y-6, 5, 5, 0, 360);
+        g.drawArc(x+5, y-14, 8, 8, 0, 360);
+        g.drawArc(x+13, y-24, 10, 10, 0, 360);
         
         // Restore the font and color
         g.setColor(origColor);
