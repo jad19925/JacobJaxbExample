@@ -66,12 +66,6 @@ public class BasicDesktop implements ActionListener {
 				try {
 					BasicDesktop window = new BasicDesktop();
 					window.frame.setVisible(true);
-
-//					Graphics gl = window.speechTest.getGraphics();
-//					//SpeechBubble.drawBubble(gl, 50, 200, 50, 50);
-//					gl.setColor(Color.BLACK);
-//					gl.fillRect(400, 200, 50, 50);
-//					window.speechTest.repaint();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -269,7 +263,7 @@ public class BasicDesktop implements ActionListener {
 		
 		speechTest = new ThoughtBubble("What a great game, I learned so much!");
 		//speechTest.setFont(new Font(config.getFontName(), Font.PLAIN, config.getFontSize()));
-		speechTest.setBounds(400, 200, 200, 100);
+		speechTest.setBounds(400, 200, 250, 125);
 		speechTest.setPointDirection(ThoughtBubble.PointDirection.LEFT_DOWN);
 		//speechTest.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
 		layeredPane.setLayer(speechTest, 3);
