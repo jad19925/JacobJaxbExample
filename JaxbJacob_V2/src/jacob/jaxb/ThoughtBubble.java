@@ -166,6 +166,7 @@ public class ThoughtBubble extends JLabel {
         		drawPlus(g, points[i].x, points[i].y);
         	}
         }
+        paintArc2PointsRadius(points[1].x, points[1].y, points[2].x, points[2].y, 5, g);
 //      g.drawArc(x+height/2-28, 8, 15, 15, 30, 210);
 //      g.drawArc(x+height/2-15, 0, 15, 15, 0, 210);
 //      g.drawArc(x+height/2, 0, 15, 15, 0, 180);
@@ -317,6 +318,37 @@ public class ThoughtBubble extends JLabel {
     	//the above simplifies to:
     	double angle = (double)length/(double)radius;
     	return angle;
+    }
+    
+    //applies only for the rounded rectangle used in this class
+    private void paintArc2PointsRadius(int x1, int y1, int x2, int y2, int radius, Graphics g) {
+    	int xm, ym, xo, yo;
+    	int dist;
+    	double angle1, angle2;
+    	int deg1, deg2;
+    	//points along the top of the shape
+    	if(x1 < x2) {
+    		//find midpoint between points
+    		dist = (int)Math.sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));
+    		xm = (x1+x2)/2;
+    		ym = (y1+y2)/2;
+    		
+    		//shift toward center 1-2 px
+    		//find arc origin x,y and angles
+    		xo=xm-dist/2;
+    		yo=ym-dist/2;
+    		//need to fix this
+    		angle1 = Math.atan2(1*(y1-ym) - 0*(x1-xm), 1*(x1-xm) + 0*(y1-ym));
+    		deg1 = (int)Math.toDegrees(angle1);
+    		angle2 = Math.atan2(1*(y2-ym) - 0*(x2-xm), 1*(x2-xm) + 0*(y2-ym));
+    		deg2 = (int)Math.toDegrees(angle2);
+    		//draw arc
+    		g.drawArc(xo, yo, dist, dist, deg2, deg1-deg2);
+    	}
+    	//points along the bottom of the image
+    	else {
+    		
+    	}
     }
     
     protected void paintComponent(Graphics g)
