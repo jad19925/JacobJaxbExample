@@ -159,7 +159,13 @@ public class ThoughtBubble extends JLabel {
        * 
        */
         int per = perimeterRoundedRect(width-PADDING,height-PADDING);
-        drawPlus(g, x+PADDING/2, y - height/2 - ARROW_HEIGHT);
+        Point[] points = getRoundedRectPoints(x+PADDING/2, y - height - ARROW_HEIGHT+PADDING/2, width-PADDING, height-PADDING, (height-PADDING)/2, 30);
+        //drawPlus(g, x+PADDING/2, y - height/2 - ARROW_HEIGHT);
+        for(int i = 0; i<points.length;i++) {
+        	if(points[i] != null){
+        		drawPlus(g, points[i].x, points[i].y);
+        	}
+        }
 //      g.drawArc(x+height/2-28, 8, 15, 15, 30, 210);
 //      g.drawArc(x+height/2-15, 0, 15, 15, 0, 210);
 //      g.drawArc(x+height/2, 0, 15, 15, 0, 180);
@@ -237,11 +243,60 @@ public class ThoughtBubble extends JLabel {
     //assumes the radius of the end arcs is height/2
     private Point[] getRoundedRectPoints(int x, int y, int width, int height, int radius, int numPoints)
     {
-    	Point[] points = new Point[30];
+    	Point[] points = new Point[numPoints+1];
     	int perimeter = perimeterRoundedRect(width,height);
     	
+    	//initial point
+    	points[0] = new Point();
     	points[0].x = x;
     	points[0].y = y+height/2;
+    	points[numPoints] = new Point();
+    	points[numPoints].x = points[0].x;
+    	points[numPoints].y = points[0].y;
+    	
+    	int curX = x + (int)((double)radius*(1-Math.cos(getAngleForArcLength((perimeter/30 + 1),radius))));
+    	int i = 1;
+    	
+    	while(curX < x+radius){
+    		points[i] = new Point();
+    		points[i].x = curX;
+    		points[i].y = y+height/2 - (int)((double)radius*Math.sin(getAngleForArcLength((i*perimeter/30 + 1),radius)));
+    		points[numPoints-i] = new Point();
+    		points[numPoints-i].x = curX;
+    		points[numPoints-i].y = y+height/2 + (int)((double)radius*Math.sin(getAngleForArcLength((i*perimeter/30 + 1),radius)));
+    		
+    		i++;
+    		curX = x + (int)((double)radius*(1-Math.cos(getAngleForArcLength((i*perimeter/30 + 1),radius))));
+    	}
+    	while(curX < x+width-radius){
+    		points[i] = new Point();
+    		points[i].x = curX;
+    		points[i].y = y;
+    		points[numPoints-i] = new Point();
+    		points[numPoints-i].x = curX;
+    		points[numPoints-i].y = y+height;
+    		
+    		i++;
+    		curX = curX + (perimeter/30+1);
+    	}
+    	if(numPoints%2==0){
+	    	int j = numPoints/2;
+	    	points[j] = new Point();
+	    	points[j].x = x+width;
+	    	points[j].y = y+height/2;
+	    	j--;
+	    	curX = x + width - (int)((double)radius*(1-Math.cos(getAngleForArcLength(((15-j)*perimeter/30 + 1),radius))));
+	    	while(j>=i){
+	    		points[j] = new Point();
+	    		points[j].x = curX;
+	    		points[j].y = y+height/2 - (int)((double)radius*Math.sin(getAngleForArcLength(((15-j)*perimeter/30 + 1),radius)));
+	    		points[numPoints-j] = new Point();
+	    		points[numPoints-j].x = curX;
+	    		points[numPoints-j].y = y+height/2 + (int)((double)radius*Math.sin(getAngleForArcLength(((15-j)*perimeter/30 + 1),radius)));
+	    		j--;
+	    		curX = x + width - (int)((double)radius*(1-Math.cos(getAngleForArcLength(((15-j)*perimeter/30 + 1),radius))));
+	    	}
+    	}
     	
     	return points;
     }
@@ -253,6 +308,15 @@ public class ThoughtBubble extends JLabel {
     	perimeter = (width - height)*2;
     	perimeter += height*Math.PI;
     	return perimeter;
+    }
+    
+    private double getAngleForArcLength(int length, int radius){
+//    	double circ = 2*Math.PI*radius;
+//    	double circPercent = ((double)length)/circ;
+//    	double angle = 2*Math.PI*circPercent;
+    	//the above simplifies to:
+    	double angle = (double)length/(double)radius;
+    	return angle;
     }
     
     protected void paintComponent(Graphics g)
