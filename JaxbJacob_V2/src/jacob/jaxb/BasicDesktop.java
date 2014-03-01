@@ -263,8 +263,8 @@ public class BasicDesktop implements ActionListener {
 		
 		speechTest = new ThoughtBubble("What a great game, I learned so much!");
 		//speechTest.setFont(new Font(config.getFontName(), Font.PLAIN, config.getFontSize()));
-		speechTest.setBounds(400, 200, 250, 125);
-		speechTest.setPointDirection(ThoughtBubble.PointDirection.LEFT_DOWN);
+		speechTest.setBounds(400, 200, 400, 200);
+		speechTest.setPointDirection(ThoughtBubble.PointDirection.CENTER_DOWN);
 		//speechTest.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
 		layeredPane.setLayer(speechTest, 3);
 		layeredPane.add(speechTest);

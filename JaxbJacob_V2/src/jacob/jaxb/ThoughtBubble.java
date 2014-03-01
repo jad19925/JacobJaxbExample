@@ -14,8 +14,6 @@ public class ThoughtBubble extends JLabel {
     private int PADDING = 8;
     private int TEXT_TOP = 8;
     private int TEXT_LEFT = 8;
-    private int xPos;
-    private int yPos;
     private int widthC;
     private int heightC;
     private String textC;
@@ -46,13 +44,11 @@ public class ThoughtBubble extends JLabel {
      */
     public void setBounds(int x, int y, int width, int height)
     {
-    	xPos = x;
-    	yPos = y;
     	widthC = width;
     	heightC = height;
     	ARROW_HEIGHT = widthC/8;
     	ARROW_WIDTH = widthC/8;
-    	PADDING = widthC/20;
+    	PADDING = widthC/14;
     	TEXT_LEFT = PADDING/2 + (heightC-ARROW_HEIGHT-PADDING)/4;
     	TEXT_TOP = PADDING/2 + (heightC-ARROW_HEIGHT-PADDING)/8;
     	super.setBounds(x, y, width, height);
@@ -105,8 +101,19 @@ public class ThoughtBubble extends JLabel {
         // Draw the base shape -- the rectangle the image will fit into as well as its outline
         g.setColor(Color.WHITE);
         g.fillRoundRect(x - width/2 + PADDING/2, y - height - ARROW_HEIGHT + PADDING/2, width-PADDING, height-PADDING, height-PADDING, height-PADDING);
-        g.setColor(Color.BLACK);
-        g.drawRoundRect(x - width/2 + PADDING/2, y - height - ARROW_HEIGHT + PADDING/2, width-PADDING, height-PADDING, height-PADDING, height-PADDING);
+//        g.setColor(Color.BLACK);
+//        g.drawRoundRect(x - width/2 + PADDING/2, y - height - ARROW_HEIGHT + PADDING/2, width-PADDING, height-PADDING, height-PADDING, height-PADDING);
+        
+        int per = perimeterRoundedRect(width-PADDING,height-PADDING);
+        Point[] points = getRoundedRectPoints(x - width/2 + PADDING/2, y - height - ARROW_HEIGHT+PADDING/2, width-PADDING, height-PADDING, (height-PADDING)/2, 30);
+//        for(int i = 0; i<points.length;i++) {
+//        	if(points[i] != null){
+//        		drawPlus(g, points[i].x, points[i].y);
+//        	}
+//        }
+        for(int i=0; i<points.length-1; i++) {
+        	paintArc2PointsRadius(points[i].x, points[i].y, points[i+1].x, points[i+1].y, per/30+2, g);
+        }
         
         //draw little circles indicating who is thinking
         g.setColor(Color.WHITE);
@@ -150,28 +157,19 @@ public class ThoughtBubble extends JLabel {
         // Draw the base shape -- the rectangle the image will fit into as well as its outline
         g.setColor(Color.WHITE);
         g.fillRoundRect(x+PADDING/2, y - height - ARROW_HEIGHT+PADDING/2, width-PADDING, height-PADDING, height-PADDING, height-PADDING);
-        g.setColor(Color.BLACK);
-        g.drawRoundRect(x+PADDING/2, y - height - ARROW_HEIGHT+PADDING/2, width-PADDING, height-PADDING, height-PADDING, height-PADDING);
-        
-        //create an array of points along the edge of the rounded rectangle and draw arcs between the points somehow?
-        g.drawRoundRect(x, y - height - ARROW_HEIGHT, width, height, height, height);
-      /*
-       * 
-       */
+//        g.setColor(Color.BLACK);
+//        g.drawRoundRect(x+PADDING/2, y - height - ARROW_HEIGHT+PADDING/2, width-PADDING, height-PADDING, height-PADDING, height-PADDING);
+
         int per = perimeterRoundedRect(width-PADDING,height-PADDING);
         Point[] points = getRoundedRectPoints(x+PADDING/2, y - height - ARROW_HEIGHT+PADDING/2, width-PADDING, height-PADDING, (height-PADDING)/2, 30);
-        //drawPlus(g, x+PADDING/2, y - height/2 - ARROW_HEIGHT);
-        for(int i = 0; i<points.length;i++) {
-        	if(points[i] != null){
-        		drawPlus(g, points[i].x, points[i].y);
-        	}
+//        for(int i = 0; i<points.length;i++) {
+//        	if(points[i] != null){
+//        		drawPlus(g, points[i].x, points[i].y);
+//        	}
+//        }
+        for(int i=0; i<points.length-1; i++) {
+        	paintArc2PointsRadius(points[i].x, points[i].y, points[i+1].x, points[i+1].y, per/30+2, g);
         }
-        paintArc2PointsRadius(points[1].x, points[1].y, points[2].x, points[2].y, 5, g);
-//      g.drawArc(x+height/2-28, 8, 15, 15, 30, 210);
-//      g.drawArc(x+height/2-15, 0, 15, 15, 0, 210);
-//      g.drawArc(x+height/2, 0, 15, 15, 0, 180);
-//      g.drawArc(x+height/2+15, 0, 15, 15, 0, 180);
-//      g.drawArc(x+height/2+30, 0, 15, 15, 0, 180);
         
         //draw little circles indicating who is thinking
         g.setColor(Color.WHITE);
@@ -215,8 +213,19 @@ public class ThoughtBubble extends JLabel {
         // Draw the base shape -- the rectangle the image will fit into as well as its outline
         g.setColor(Color.WHITE);
         g.fillRoundRect(x-width+PADDING/2, y - height - ARROW_HEIGHT+PADDING/2, width-PADDING, height-PADDING, height-PADDING, height-PADDING);
-        g.setColor(Color.BLACK);
-        g.drawRoundRect(x-width+PADDING/2, y - height - ARROW_HEIGHT+PADDING/2, width-PADDING, height-PADDING, height-PADDING, height-PADDING);
+//        g.setColor(Color.BLACK);
+//        g.drawRoundRect(x-width+PADDING/2, y - height - ARROW_HEIGHT+PADDING/2, width-PADDING, height-PADDING, height-PADDING, height-PADDING);
+        
+        int per = perimeterRoundedRect(width-PADDING,height-PADDING);
+        Point[] points = getRoundedRectPoints(x-width+PADDING/2, y - height - ARROW_HEIGHT+PADDING/2, width-PADDING, height-PADDING, (height-PADDING)/2, 30);
+//        for(int i = 0; i<points.length;i++) {
+//        	if(points[i] != null){
+//        		drawPlus(g, points[i].x, points[i].y);
+//        	}
+//        }
+        for(int i=0; i<points.length-1; i++) {
+        	paintArc2PointsRadius(points[i].x, points[i].y, points[i+1].x, points[i+1].y, per/30+2, g);
+        }
         
         //draw little circles indicating who is thinking
         g.setColor(Color.WHITE);
@@ -321,11 +330,12 @@ public class ThoughtBubble extends JLabel {
     }
     
     //applies only for the rounded rectangle used in this class
-    private void paintArc2PointsRadius(int x1, int y1, int x2, int y2, int radius, Graphics g) {
+    private void paintArc2PointsRadius(int x1, int y1, int x2, int y2, int diameter, Graphics g) {
     	int xm, ym, xo, yo;
     	int dist;
     	double angle1, angle2;
     	int deg1, deg2;
+    	Color origColor = g.getColor();
     	//points along the top of the shape
     	if(x1 < x2) {
     		//find midpoint between points
@@ -338,17 +348,51 @@ public class ThoughtBubble extends JLabel {
     		xo=xm-dist/2;
     		yo=ym-dist/2;
     		//need to fix this
-    		angle1 = Math.atan2(1*(y1-ym) - 0*(x1-xm), 1*(x1-xm) + 0*(y1-ym));
-    		deg1 = (int)Math.toDegrees(angle1);
-    		angle2 = Math.atan2(1*(y2-ym) - 0*(x2-xm), 1*(x2-xm) + 0*(y2-ym));
-    		deg2 = (int)Math.toDegrees(angle2);
+//    		angle1 = Math.atan2(1*(y1-ym) - 0*(x1-xm), 1*(x1-xm) + 0*(y1-ym));
+    		angle1 = Math.atan2(x1-xm, y1-ym);
+    		deg1 = (int)Math.toDegrees(angle1)+90;
+//    		angle2 = Math.atan2(1*(y2-ym) - 0*(x2-xm), 1*(x2-xm) + 0*(y2-ym));
+    		angle2 = Math.atan2(x2-xm, y2-ym);
+    		deg2 = (int)Math.toDegrees(angle2)+90;
     		//draw arc
-    		g.drawArc(xo, yo, dist, dist, deg2, deg1-deg2);
+//    		g.setColor(Color.WHITE);
+//    		g.fillArc(xo, yo, dist-1, dist-1, 0, 360);
+//    		g.setColor(Color.BLACK);
+//    		g.drawArc(xo, yo, dist, dist, deg1, deg2-deg1);
+    		g.setColor(Color.WHITE);
+    		g.fillArc(xo, yo, diameter, diameter, 0, 360);
+    		g.setColor(Color.BLACK);
+    		g.drawArc(xo, yo, diameter, diameter, deg1, deg2-deg1);
     	}
     	//points along the bottom of the image
     	else {
+    		//find midpoint between points
+    		dist = (int)Math.sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));
+    		xm = (x1+x2)/2;
+    		ym = (y1+y2)/2;
     		
+    		//shift toward center 1-2 px
+    		//find arc origin x,y and angles
+    		xo=xm-dist/2;
+    		yo=ym-dist/2;
+    		//need to fix this
+//    		angle1 = Math.atan2(1*(y1-ym) - 0*(x1-xm), 1*(x1-xm) + 0*(y1-ym));
+    		angle1 = Math.atan2(x1-xm, y1-ym);
+    		deg1 = (int)Math.toDegrees(angle1)+90;
+//    		angle2 = Math.atan2(1*(y2-ym) - 0*(x2-xm), 1*(x2-xm) + 0*(y2-ym));
+    		angle2 = Math.atan2(x2-xm, y2-ym);
+    		deg2 = (int)Math.toDegrees(angle2)+90;
+    		//draw arc
+//    		g.setColor(Color.WHITE);
+//    		g.fillArc(xo, yo, dist-1, dist-1, 0, 360);
+//    		g.setColor(Color.BLACK);
+//    		g.drawArc(xo, yo, dist, dist, deg1, deg1-deg2);
+    		g.setColor(Color.WHITE);
+    		g.fillArc(xo, yo, diameter, diameter, 0, 360);
+    		g.setColor(Color.BLACK);
+    		g.drawArc(xo, yo, diameter, diameter, deg1, deg1-deg2);
     	}
+    	g.setColor(origColor);
     }
     
     protected void paintComponent(Graphics g)
